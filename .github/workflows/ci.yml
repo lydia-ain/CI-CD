@@ -1,11 +1,11 @@
-name: CI/CD
+name: CI/CD Pipeline
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  run-script:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,5 +17,20 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Run CICD
-        run: python cicd.py
+      - name: Installer pytest
+        run: pip install pytest
+
+      - name: Lancer les tests
+        run: pytest
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: success()  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Déploiement simulé
+        run: echo "Déploiement réussi !"  

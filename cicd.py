@@ -1,3 +1,6 @@
-print("Hello, world!")
+def ma_fonction():
+    return 2
 
-print("Pipeline test")  
+print("Hello World")
+
+
